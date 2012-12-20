@@ -1,0 +1,14 @@
+<merge 
+	xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads">
+	
+	    <com.google.ads.AdView
+	        android:id="@+id/advertising_AdView"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        ads:loadAdOnCreate="true"
+	        ads:adSize="BANNER"
+	        ads:adUnitId="XXXXXXXXXXXXXXXXXXXXX"
+	        ads:testDevices="TEST_EMULATOR, TEST_DEVICE_ID" />
+	                
+</merge>

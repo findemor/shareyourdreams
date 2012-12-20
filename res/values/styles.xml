@@ -1,0 +1,102 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="AppTheme" parent="android:Theme.Light" />
+    
+    <style name="header_container">
+        <item name="android:layout_height">72dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@drawable/fondo_recuento</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:paddingTop">20dp</item>
+    </style>
+    
+    <style name="header_textline">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">12dp</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+    
+    <style name="main_menu_button">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:adjustViewBounds">false</item>
+        <item name="android:scaleType">fitCenter</item>
+        <item name="android:layout_margin">20dp</item>
+    </style>
+    
+    <style name="save_button">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:layout_height">100dp</item>
+        <item name="android:layout_width">100dp</item>
+        <item name="android:scaleType">fitCenter</item>
+        </style>
+    
+    <!-- ABOUT STYLES -->
+    <style name="about_normal">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginTop">10dip</item>
+        <item name="android:layout_marginRight">10dip</item>
+        <item name="android:layout_marginLeft">10dip</item>
+        <item name="android:textStyle">italic</item>
+    </style>
+
+    <style name="about_light">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_margin">10dip</item>
+        <item name="android:textColor">@color/text_primary_light</item>
+        <item name="android:textSize">15dip</item>
+    </style>
+
+    <style name="about_desc">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginRight">10dip</item>
+        <item name="android:layout_marginLeft">10dip</item>
+        <item name="android:textStyle">italic</item>
+    </style>
+
+    <style name="about_contact">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/text_primary_light</item>
+    </style>
+
+    <style name="about_powered">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginTop">40dip</item>
+        <item name="android:layout_marginRight">10dip</item>
+        <item name="android:layout_marginLeft">10dip</item>
+        <item name="android:textSize">10dip</item>
+        <item name="android:paddingBottom">20dip</item>
+    </style>
+    
+    <style name="about_instance" parent="@style/about_powered">
+        <item name="android:layout_marginTop">0dip</item>
+    </style>
+    <style name="about_instance_top" parent="@style/about_powered">
+        <item name="android:paddingBottom">0dip</item>
+        <item name="android:textStyle">italic</item>
+    </style>
+    
+    <style name="navigationBottomLine">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/text_new_light</item>
+    </style>
+    
+    <!-- ABOUT STYLES END -->
+
+</resources>

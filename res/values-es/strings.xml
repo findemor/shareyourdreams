@@ -1,0 +1,42 @@
+<resources>
+
+    <string name="app_name">Comparte tus sueños</string>
+    <string name="menu_settings">Configuración</string>
+    <string name="title_activity_main">Comparte tus sueños</string>
+    <string name="counter_dreams">Has guardado {0} sueños</string>
+    <string name="counter_nightmares">Has guardado {0} pesadillas</string>
+    <string name="counter_global_dreams">Se han registrado {0} sueños</string>
+    <string name="counter_global_nightmares">Se han registrado {0} pesadillas</string>
+    <string name="dream_description">Describe tu sueño para compartirlo</string>
+    <string name="nightmare_description">Describe tu pesadilla para compartirla</string>
+    <string name="cancel">Cancelar</string>
+    <string name="upload_wait_title">Guardando</string>
+    <string name="upload_wait_desc">Por favor, espera mientras guardamos tus sueños...</string>
+	<string name="empty_database">Aún no has guardado ningún sueño, no dejes que se te olviden.</string>
+	<string name="dream">Sueño</string>
+	<string name="nightmare">Pesadilla</string>
+	<string name="close">Cerrar</string>
+    <string name="connection_error">Hubo un problema en la conexión. Por favor inténtalo más tarde.</string>
+    <string name="charactersLeft">Caracteres restantes</string>
+    <string name="send">Enviar</string>
+    <string name="about">Acerca de</string>
+    <string name="spell_text0">SI</string>
+    <string name="spell_text1">NO</string>
+    <string name="spell_text2">AÚN NO</string>
+    <string name="spell_text3">QUIZÁS</string>
+    <string name="spell_info">Pulsa para empezar</string>
+    <string name="spell_title">Piensa en tu sueño mientras se completa el hechizo de adivinación para saber si se cumplirá.</string>
+    
+    <string name="about_app_developed_by">app developed by</string>
+    <string name="about_app_developed_by_author">DEVERGENCE</string>
+    <string name="about_app_description">Share Your Dreams is an app developed by DEVERGENCE and powered by topoos: the context aware applications platform</string>
+    <string name="about_contact">Contact us</string>
+    <string name="about_contact_web">www.devergence.com</string>
+    <string name="about_contact_email">contacto@devergence.com</string>
+    <string name="about_contact_fb">on Facebook</string>
+    <string name="about_contact_fb_link">www.facebook.com/devergence.studios</string>
+    <string name="about_contact_tw">on Twitter</string>
+    <string name="about_contact_tw_link">\ @devergence_std</string>
+    <string name="about_contract">powered by www.topoos.com</string>
+	
+</resources>

@@ -1,0 +1,112 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo" >
+
+    <ImageView
+        android:id="@+id/header"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/titulo" />
+
+    <LinearLayout
+        android:id="@+id/header_titles"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/header"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/spell_title"
+            android:gravity="center_horizontal"
+            android:textColor="@color/text_new_light"
+            android:padding="10dp" >
+        </TextView>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/spell_container"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/ads"
+        android:layout_below="@+id/header_titles"
+        android:orientation="vertical"
+        android:padding="20dp" >
+        
+		<LinearLayout
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_alignTop="@+id/img_ball"
+            android:layout_alignLeft="@+id/img_ball"
+            android:background="@drawable/drw_circle" />
+
+        <WebView
+            android:id="@+id/spell_view"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:background="@android:color/transparent"
+            android:layout_marginTop="1dp"
+            android:layout_alignTop="@+id/img_ball"
+            android:layout_alignLeft="@+id/img_ball"
+            android:visibility="invisible" />
+        
+        <ImageButton
+            android:id="@+id/img_ball"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@android:color/transparent"
+            android:src="@drawable/img_ball_void"
+            android:onClick="onBallClick" />
+
+        <TextView
+            android:id="@+id/spell_text"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:gravity="center|center_vertical"
+            android:layout_alignTop="@+id/img_ball"
+            android:layout_alignLeft="@+id/img_ball"
+            android:textSize="40dp"
+            android:textColor="@color/text_spell"
+            android:visibility="invisible" >
+        </TextView>
+        
+        <TextView
+            android:id="@+id/spell_info"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:gravity="center|center_vertical"
+            android:layout_alignTop="@+id/img_ball"
+            android:layout_alignLeft="@+id/img_ball"
+            android:textSize="12dp"
+            android:text="@string/spell_info"
+            android:textColor="@color/text_secondary_light" >
+        </TextView>
+        
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/img_ball"
+            android:layout_alignLeft="@+id/img_ball"
+            android:src="@drawable/img_ball_shine" />
+        
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ads"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true" >
+
+        <include layout="@layout/ads_item" />
+    </LinearLayout>
+
+</RelativeLayout>

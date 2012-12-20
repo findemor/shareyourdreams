@@ -1,0 +1,80 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo" >
+
+    <ImageView
+        android:id="@+id/header"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/titulo" />
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/ads"
+        android:layout_below="@+id/header"
+        android:orientation="vertical" >
+
+        <TableRow
+            android:layout_height="fill_parent"
+            android:layout_weight="1" >
+
+            <ImageButton
+                android:id="@+id/btnRegisterDream"
+                style="@style/main_menu_button"
+                android:onClick="onRegisterDream"
+                android:src="@drawable/btn_menu_sue" />
+
+            <ImageButton
+                android:id="@+id/btnRegisterNightmare"
+                style="@style/main_menu_button"
+                android:onClick="onRegisterNightmare"
+                android:src="@drawable/btn_menu_pes" />
+        </TableRow>
+
+        <TableRow
+            android:layout_height="fill_parent"
+            android:layout_weight="1" >
+
+            <ImageButton
+                android:id="@+id/btnDatabase"
+                style="@style/main_menu_button"
+                android:onClick="onViewDatabase"
+                android:src="@drawable/btn_menu_con" />
+
+            <ImageButton
+                android:id="@+id/btnMap"
+                style="@style/main_menu_button"
+                android:onClick="onViewMap"
+                android:src="@drawable/btn_menu_map" />
+        </TableRow>
+
+        <TableRow
+            android:layout_height="fill_parent"
+            android:layout_weight="1" >
+
+            <ImageButton
+                android:id="@+id/btnSpell"
+                style="@style/main_menu_button"
+                android:onClick="onViewSpell"
+                android:src="@drawable/btn_menu_bol" />
+        </TableRow>
+    </TableLayout>
+
+    <LinearLayout
+        android:id="@+id/ads"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true" >
+
+        <include layout="@layout/ads_item" />
+    </LinearLayout>
+
+</RelativeLayout>

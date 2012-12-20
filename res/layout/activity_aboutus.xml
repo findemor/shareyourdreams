@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+	    	style="@style/navigationBottomLine" >
+	</LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                style="@style/about_normal"
+                android:text="@string/about_app_developed_by" />
+
+            <TextView
+                style="@style/about_light"
+                android:text="@string/about_app_developed_by_author" />
+
+            <TextView
+                style="@style/about_desc"
+                android:text="@string/about_app_description" />
+
+            <TextView
+                style="@style/about_normal"
+                android:text="@string/about_contact" />
+
+            <TextView
+                style="@style/about_contact"
+                android:text="@string/about_contact_web" />
+
+            <TextView
+                style="@style/about_contact"
+                android:text="@string/about_contact_email" />
+
+            <TextView
+                style="@style/about_normal"
+                android:text="@string/about_contact_fb" />
+
+            <TextView
+                style="@style/about_contact"
+                android:text="@string/about_contact_fb_link" />
+
+            <TextView
+                style="@style/about_normal"
+                android:text="@string/about_contact_tw" />
+
+            <TextView
+                style="@style/about_contact"
+                android:text="@string/about_contact_tw_link" />
+
+            <TextView
+                style="@style/about_powered"
+                android:text="@string/about_contract" />
+                                    
+            
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

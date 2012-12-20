@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<resources>
+  <string name="ga_trackingId">UA-27700935-1</string>
+  <!--Enable Activity tracking-->
+  <bool name="ga_autoActivityTracking">true</bool>
+  <!--Enable automatic exception tracking-->
+  <bool name="ga_reportUncaughtExceptions">true</bool>
+  <!-- in secs. default 30 min -->
+  <integer name="ga_dispatchPeriod">60</integer>
+  
+</resources>
