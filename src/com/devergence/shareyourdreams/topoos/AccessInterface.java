@@ -17,7 +17,7 @@ import topoos.Objects.POICategory;
 public class AccessInterface {
 	
 	////Must get your tokens from topoos developer panel https://developers.topoos.com
-	private static final String TOPOOS_ADMIN_APP_TOKEN = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+	private static final String TOPOOS_ADMIN_APP_TOKEN = "31990ed6-bb54-4c61-bc9e-b9cded9fe139";
 	
 	////We must use the integer id that we got when we registered this POI the first time (manually)
 	private static final int PREREGISTERED_POI_FOR_COUNTERS = -1;
