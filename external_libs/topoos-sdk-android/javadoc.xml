@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="javadoc">
+    <target name="javadoc">
+        <javadoc access="public" author="true" classpath="C:\Program Files (x86)\Android\android-sdk\tools\support\annotations.jar;libs/android-support-v4.jar" destdir="doc" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" packagenames="topoos.OAuth,topoos.Users,topoos.POI,topoos.POICategories,topoos.Resources,topoos.POIWarning,topoos.Checkin,topoos.Track,com.topoos.sdk,topoos,topoos.Rules,topoos.APIAccess.Operations,topoos.Exception,topoos.APIAccess.Results,topoos.APIAccess,topoos.Export,topoos.Objects,topoos.Positions" source="1.5" sourcepath="gen;src" splitindex="true" use="true" version="true">
+            <link href="file:/C:/GIT-Projetcs/Android/SDKTopoos/doc/"/>
+        </javadoc>
+    </target>
+</project>
