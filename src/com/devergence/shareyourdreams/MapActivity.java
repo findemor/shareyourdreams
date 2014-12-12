@@ -2,16 +2,21 @@ package com.devergence.shareyourdreams;
 
 import java.util.List;
 import java.util.Random;
-import com.devergence.shareyourdreams.map.CircleOverlay;
-import com.devergence.shareyourdreams.map.DreamOverlay;
+
 import com.devergence.shareyourdreams.map.Utils;
 import com.devergence.shareyourdreams.topoos.AccessInterface;
 import com.devergence.shareyourdreams.topoos.GlobalDreamCounters;
 import com.devergence.shareyourdreams.topoos.POICategories;
-import com.google.android.maps.GeoPoint;
-import com.google.android.maps.MapController;
-import com.google.android.maps.MapView;
-import com.google.android.maps.OverlayItem;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CircleOptions;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 import topoos.Objects.POI;
 import android.location.Location;
 import android.location.LocationListener;
@@ -21,6 +26,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.Handler.Callback;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.Window;
@@ -38,12 +44,10 @@ public class MapActivity extends CustomMapActivity {
 	private static final int WORKER_MSG_GLOBAL_ERROR = -2;
 
 	private LocationManager mLocationManager;
-	private MapView mMapView;
-	private MapController mMapController;
 
 	private Location m_DeviceLocation = null;
 	private Handler m_Handler = new Handler(new ResultMessageCallback());
-
+	private GoogleMap mapa;
 	private List<POI> m_pois = null;
 
 	@Override
@@ -55,8 +59,19 @@ public class MapActivity extends CustomMapActivity {
 		setContentView(R.layout.activity_map);
 
 		// Get view references
-		mMapView = (MapView) findViewById(R.id.mapview);
-		mMapController = mMapView.getController();
+		mapa = ((SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map)).getMap();
+		
+		mapa.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+		    @Override
+		    public void onMapLoaded() {
+		    	configureMap();
+		    }
+		});
+	}
+	
+	private void configureMap()
+	{
 
 		// Get Location Manager references
 		mLocationManager = (LocationManager) this
@@ -64,12 +79,22 @@ public class MapActivity extends CustomMapActivity {
 
 		// Get last cached device location
 		String locationProvider = LocationManager.NETWORK_PROVIDER;
-		Location lastKnownLocation = mLocationManager
+		Location lastKnownLocation = null;
+		if (mLocationManager.isProviderEnabled(locationProvider))
+		{
+			lastKnownLocation = mLocationManager
 				.getLastKnownLocation(locationProvider);
-
+		} else 
+		{
+			// Center map
+			lastKnownLocation = new Location("NoProvider");
+			lastKnownLocation.setLatitude(0);
+			lastKnownLocation.setLongitude(0);
+		} 
+		
 		if (lastKnownLocation != null) {
 			// Center map
-			mMapController.setZoom(20); // Fixed Zoom Level
+			mapa.animateCamera( CameraUpdateFactory.zoomTo( 20.0f ) );   
 			centerLocationAndLoadDreams(lastKnownLocation);
 			m_DeviceLocation = lastKnownLocation;
 		} else {
@@ -93,12 +118,9 @@ public class MapActivity extends CustomMapActivity {
 	 * @param loc
 	 */
 	private void centerLocationAndLoadDreams(Location loc) {
-		GeoPoint geoPoint = new GeoPoint((int) (loc.getLatitude() * 1000000),
-				(int) (loc.getLongitude() * 1000000));
-
-		Utils.BoundingCoordinates(geoPoint, AccessInterface.SEARCH_RADIUS_METERS, mMapView);
-
-		mMapController.animateTo(geoPoint);
+		
+		//mapa.animateCamera(CameraUpdateFactory.newLatLng(new LatLng(loc.getLatitude(), loc.getLongitude())));
+		Utils.BoundingCoordinates(this, loc, AccessInterface.SEARCH_RADIUS_METERS, mapa);
 
 		Thread thread = new Thread(new LoadDreamWorker());
 		thread.start();
@@ -108,38 +130,78 @@ public class MapActivity extends CustomMapActivity {
 	 * Draw Dreams before loading
 	 */
 	private void drawDreams() {
-		mMapView.getOverlays().clear();
+		mapa.clear();
 
-		mMapView.getOverlays().add(
-				new CircleOverlay(this, m_DeviceLocation.getLatitude(),
-						m_DeviceLocation.getLongitude(),
-						AccessInterface.SEARCH_RADIUS_METERS));
-
+		CircleOptions radius = new CircleOptions()
+	     .center(new LatLng(m_DeviceLocation.getLatitude(), m_DeviceLocation.getLongitude()))
+	     .radius(AccessInterface.SEARCH_RADIUS_METERS)
+	     .strokeColor(getResources().getColor(R.color.radius_border))
+	     .fillColor(getResources().getColor(R.color.radius_solid));
+		
+		mapa.addCircle(radius);
+		
 		if (m_pois != null) {
 			for (POI p : m_pois) {
 				// 1 - create marker
 				
+				int resource = getRandomMarkerResource(AccessInterface.IsDream(p.getCategories()) ? POICategories.DREAM : POICategories.NIGHTMARE);
+				BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(resource);
 				
+				// 2 - set marker properties
 				
-				Drawable drawable = getRandomMarker(AccessInterface.IsDream(p.getCategories()) ? POICategories.DREAM : POICategories.NIGHTMARE);
+				MarkerOptions markerOptions = new MarkerOptions().position(new LatLng(p.getLatitude(), p.getLongitude()))
+	                     .title(AccessInterface.IsDream(p.getCategories()) ? getString(R.string.dream) : getString(R.string.nightmare))
+	                     .snippet(p.getDescription())
+	                     .icon(icon);
 				
-				DreamOverlay itemizedoverlay = new DreamOverlay(drawable, this);
-				// 2 - geolocalize marker
-				GeoPoint geoPoint = new GeoPoint(
-						(int) (p.getLatitude() * 1000000),
-						(int) (p.getLongitude() * 1000000));
-				OverlayItem overlayitem = new OverlayItem(
-						geoPoint,
-						AccessInterface.IsDream(p.getCategories()) ? getString(R.string.dream)
-								: getString(R.string.nightmare),
-						p.getDescription());
 				// 3 - Add marker to map
-				itemizedoverlay.addOverlay(overlayitem);
-				mMapView.getOverlays().add(itemizedoverlay);
+				mapa.addMarker(markerOptions);
 			}
 		}
 
-		mMapView.postInvalidate();
+	}
+	
+
+	/**
+	 * get fun in the markers :)
+	 * @param type
+	 * @return
+	 */
+	private int getRandomMarkerResource(int type)
+	{
+		int drawable = 0;
+		
+		Random randomGenerator = new Random();
+		int randomInt = randomGenerator.nextInt(3);
+		
+		
+		if (type == POICategories.DREAM)
+		{
+			if (randomInt == 0)
+			{
+				drawable = R.drawable.mapa_sue1;
+			}else if (randomInt == 2)
+			{
+				drawable = R.drawable.mapa_sue3;
+			}else
+			{
+				drawable = R.drawable.mapa_sue2;
+			}
+		}else if (type == POICategories.NIGHTMARE)
+		{
+			if (randomInt == 0)
+			{
+				drawable = R.drawable.mapa_pes1;
+			}else if (randomInt == 2)
+			{
+				drawable = R.drawable.mapa_pes3;
+			}else
+			{
+				drawable = R.drawable.mapa_pes2;
+			}
+		}
+		
+		return drawable;
 	}
 	
 	/**
@@ -147,7 +209,7 @@ public class MapActivity extends CustomMapActivity {
 	 * @param type
 	 * @return
 	 */
-	private Drawable getRandomMarker(int type)
+	private Drawable getRandomMarkerDrawable(int type)
 	{
 		Drawable drawable = null;
 		

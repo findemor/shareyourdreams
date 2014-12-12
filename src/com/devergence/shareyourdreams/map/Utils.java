@@ -1,8 +1,19 @@
 package com.devergence.shareyourdreams.map;
 
-import com.google.android.maps.GeoPoint;
-import com.google.android.maps.MapController;
-import com.google.android.maps.MapView;
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
+import android.location.Location;
+import android.os.Build;
+import android.view.View;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
+
+import com.devergence.shareyourdreams.R;
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 
 public class Utils {
 
@@ -12,7 +23,7 @@ public class Utils {
 	 * @param gp
 	 * @param distance meters
 	 */
-	public static void BoundingCoordinates(GeoPoint gp, double distance, MapView mMapView) {
+	public static void BoundingCoordinates(Activity act, Location loc, double distance, final GoogleMap mMapView) {
 
 		double MIN_LAT = -90;
 		double MAX_LAT = 90;
@@ -27,18 +38,8 @@ public class Utils {
 		// angular distance in radians on a great circle
 		double radDist = distance / radius;
 
-		double radLat = Math.toRadians(gp.getLatitudeE6() / 1e6); // here is
-																	// your
-																	// single
-																	// point
-																	// latitude
-																	// gp.getLatitude
-		double radLon = Math.toRadians(gp.getLongitudeE6() / 1e6); // here is
-																	// your
-																	// single
-																	// point
-																	// longitude
-																	// gp.getlongitude
+		double radLat = Math.toRadians(loc.getLatitude()); 
+		double radLon = Math.toRadians(loc.getLongitude());
 
 		double minLat = radLat - radDist;
 		double maxLat = radLat + radDist;
@@ -68,11 +69,12 @@ public class Utils {
 		maxLat = Math.toDegrees(maxLat);
 		maxLon = Math.toDegrees(maxLon);
 
-		// GeoPoint minGeo = new GeoPoint((int)(minLat*1e6),(int)(minLon*1e6));
-		// GeoPoint maxGeo = new GeoPoint((int)(maxLat*1e6),(int)(maxLon*1e6));
-
-		final MapController controller = mMapView.getController();
-		controller.zoomToSpan((int) (Math.abs(minLat - maxLat) * 1000000),
-				(int) (Math.abs(minLon - maxLon) * 1000000));
+		LatLng southwest = new LatLng(minLat, minLon);
+		LatLng northeast = new LatLng(maxLat, maxLon);
+		final LatLngBounds bounds = new LatLngBounds(southwest, northeast);
+		mMapView.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 10));
+		
+		
+		
 	}
 }

@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class CustomMapActivity extends com.google.android.maps.MapActivity {
+public class CustomMapActivity extends android.support.v4.app.FragmentActivity {
 
 	@Override
 	protected void onStart() {
@@ -21,12 +21,6 @@ public class CustomMapActivity extends com.google.android.maps.MapActivity {
 	protected void onStop() {
 		super.onStop();
 		EasyTracker.getInstance().activityStop(this); // Add this method.
-	}
-
-	@Override
-	protected boolean isRouteDisplayed() {
-		// TODO Auto-generated method stub
-		return false;
 	}
 	
 
